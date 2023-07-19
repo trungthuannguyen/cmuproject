@@ -1,0 +1,22 @@
+.banner-container {
+    background-image: url("bg1.jpg");
+    background-size: cover;
+}
+
+.banner-text {
+    font-size: 30px;
+    color: #fff;
+}
+
+.banner-logo {
+    height: 80px;
+    padding-right: 20px;
+}
+
+.footer-container {
+    background-color: #34495e;
+}
+
+.footer-text {
+    color: #fff;
+}
