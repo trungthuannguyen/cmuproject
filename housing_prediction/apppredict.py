@@ -216,59 +216,45 @@ def main():
     st.write("### House Price Prediction")
 
     st.write("**Enter the following features to get the predicted price:**")
-    st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
+    st.header("")
+    input_col1, input_col2 = st.columns(2)
 
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
-    with col1:
+    with input_col1:
         st.write("**CRIM** - Per Capita Crime Rate:")
         crim = st.number_input("", key="crim", value=0.0, step=0.01)
-    with col2:
-        st.write("**ZN** - Proportion of Residential Land Zoned:")
-        zn = st.number_input("", key="zn", value=0.0, step=0.5)
-    with col3:
         st.write("**INDUS** - Proportion of Non-Retail Business Acres:")
         indus = st.number_input("", key="indus", value=0.0, step=0.01)
-    with col4:
-        st.write("**CHAS** - Charles River Dummy Variable:")
-        chas = st.selectbox("", key="chas", options=[0, 1])
-    with col5:
         st.write("**NOX** - Nitric Oxides Concentration (parts per 10 million):")
         nox = st.number_input("", key="nox", value=0.0, step=0.01)
-    with col6:
-        st.write("**RM** - Average Number of Rooms per Dwelling:")
-        rm = st.number_input("", key="rm", value=0.0, step=0.01)
-
-    col7, col8, col9, col10, col11, col12 = st.columns(6)
-    with col7:
         st.write("**AGE** - Proportion of Owner-Occupied Units Built Prior to 1940:")
         age = st.number_input("", key="age", value=0.0, step=0.01)
-    with col8:
-        st.write("**DIS** - Weighted Distances to Five Boston Employment Centers:")
-        dis = st.number_input("", key="dis", value=0.0, step=0.01)
-    with col9:
         st.write("**RAD** - Index of Accessibility to Radial Highways:")
         rad = st.number_input("", key="rad", value=0.0, step=1.0)
-    with col10:
-        st.write("**TAX** - Full-Value Property Tax Rate per $10,000:")
-        tax = st.number_input("", key="tax", value=0.0, step=1.0)
-    with col11:
         st.write("**PTRATIO** - Pupil-Teacher Ratio by Town:")
         ptratio = st.number_input("", key="ptratio", value=0.0, step=0.01)
-    with col12:
-        st.write("**B** - Proportion of Blacks:")
-        b = st.number_input("", key="b", value=0.0, step=0.01)
-
-    col13, col14 = st.columns(2)
-    with col13:
         st.write("**LSTAT** - Percentage of Lower Status of the Population:")
         lstat = st.number_input("", key="lstat", value=0.0, step=0.01)
-    with col14:
+
+    with input_col2:
+        st.write("**ZN** - Proportion of Residential Land Zoned:")
+        zn = st.number_input("", key="zn", value=0.0, step=0.5)
+        st.write("**CHAS** - Charles River Dummy Variable:")
+        chas = st.selectbox("", key="chas", options=[0, 1])
+        st.write("**RM** - Average Number of Rooms per Dwelling:")
+        rm = st.number_input("", key="rm", value=0.0, step=0.01)
+        st.write("**DIS** - Weighted Distances to Five Boston Employment Centers:")
+        dis = st.number_input("", key="dis", value=0.0, step=0.01)
+        st.write("**TAX** - Full-Value Property Tax Rate per $10,000:")
+        tax = st.number_input("", key="tax", value=0.0, step=1.0)
+        st.write("**B** - Proportion of Blacks:")
+        b = st.number_input("", key="b", value=0.0, step=0.01)
         st.write("**MEDV** - Median value of owner-occupied homes in $1000's:")
         medv = st.number_input("", key="medv", value=0.0, step=0.01)
 
-    input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat, medv]])
+    submitted = st.button('Predict Price')
 
-    if st.button("Predict Price"):
+    if submitted:
+        input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat, medv]])
         prediction_lr = predict_price_linear_regression(model_lr, input_data)
         st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
 
