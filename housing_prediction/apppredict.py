@@ -63,7 +63,7 @@ st.markdown(
 # Function to load the dataset
 @st.cache_data()
 def load_data():
-    url = 'Boston_Housing.csv'
+    url = './housing_prediction/Boston_Housing.csv'
     return pd.read_csv(url)
 # Function to describe the attribute information
 def describe_attributes():
