@@ -155,7 +155,7 @@ def train_model(df):
     st.write("#### Model Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model, "LinearRegression.pkl")
+    save_model(model, "housing_prediction/LinearRegression.pkl")
     return model
 
 # Function to train and evaluate the Random Forest model
@@ -179,7 +179,7 @@ def train_model_random_forest(df):
     st.write("#### Model Random Forest Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model_rf, "RandomForest.pkl")
+    save_model(model_rf, "housing_prediction/RandomForest.pkl")
     return model_rf
 
 # Function to predict house prices using Linear Regression
