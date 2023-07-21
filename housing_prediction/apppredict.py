@@ -13,7 +13,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 
 # Header with logo
-logo_path = "team3vn_cmu.jpg"
+logo_path = "housing_prediction/team3vn_cmu.jpg"
 # Center the logo on the page
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 with col1:
@@ -64,7 +64,7 @@ st.markdown(
 # Function to load the dataset
 @st.cache_data()
 def load_data():
-    url = 'Boston_Housing.csv'
+    url = 'housing_prediction/Boston_Housing.csv'
     return pd.read_csv(url)
 
 # Function to describe the attribute information
