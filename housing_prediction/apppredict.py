@@ -11,7 +11,6 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
-import seaborn as sns
 
 # Header with logo
 logo_path = "team3vn_cmu.jpg"
