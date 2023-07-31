@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
+import seaborn as sns
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, Ridge
@@ -120,21 +121,16 @@ def explore_data(df):
     st.write("#### Correlation Heatmap")
     corr_matrix = df.corr()
     fig, ax = plt.subplots()
-    cax = ax.matshow(corr_matrix, cmap='coolwarm')
-    fig.colorbar(cax)
-    ax.set_xticks(np.arange(len(corr_matrix.columns)))
-    ax.set_yticks(np.arange(len(corr_matrix.columns)))
-    ax.set_xticklabels(corr_matrix.columns, rotation=45, ha='left')
-    ax.set_yticklabels(corr_matrix.columns)
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
     st.pyplot(fig)
 
     st.write("#### Box Plot")
     fig, ax = plt.subplots()
-    df.boxplot(ax=ax)
+    sns.boxplot(data=df, orient='h', palette='Set2')
     st.pyplot(fig)
 
     st.write("#### Pair Plot")
-    fig = pd.plotting.scatter_matrix(df, alpha=0.7, figsize=(10, 10), diagonal='kde')
+    fig = sns.pairplot(df, diag_kind='kde')
     st.pyplot(fig)
 
     st.write("#### Bar Plot")
@@ -146,7 +142,7 @@ def explore_data(df):
 
     st.write("#### KDE Plot")
     fig, ax = plt.subplots()
-    df['DIS'].plot(kind='kde', ax=ax)
+    sns.kdeplot(data=df['DIS'], shade=True)
     ax.set_xlabel('DIS: Weighted distances to five Boston employment centers')
     ax.set_ylabel('Density')
     st.pyplot(fig)
