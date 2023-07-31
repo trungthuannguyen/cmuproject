@@ -3,3 +3,8 @@ scikit-learn
 streamlit
 pandas
 tensorflow
+pytest
+flask
+numpy
+requests
+seaborn
