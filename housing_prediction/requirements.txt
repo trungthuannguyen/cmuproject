@@ -7,3 +7,4 @@ pytest
 flask
 numpy
 requests
+seaborn
