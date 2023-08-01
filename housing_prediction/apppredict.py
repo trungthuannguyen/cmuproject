@@ -5,16 +5,13 @@ import matplotlib.pyplot as plt
 import pickle
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV
 
 # Header with logo
-logo_path = "housing_prediction/team3vn_cmu.jpg"
+logo_path = "team3vn_cmu.jpg"
 # Center the logo on the page
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 with col1:
@@ -67,29 +64,6 @@ st.markdown(
 def load_data(file_path):
     return pd.read_csv(file_path)
 
-# Function to get min, max, and mean values from the dataset description
-def get_dataset_stats(df):
-    stats = {}
-    stats['CRIM'] = (df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
-    stats['ZN'] = (df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
-    stats['INDUS'] = (df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
-    stats['CHAS'] = (df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
-    stats['NOX'] = (df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
-    stats['RM'] = (df['RM'].min(), df['RM'].max(), df['RM'].mean())
-    stats['AGE'] = (df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
-    stats['DIS'] = (df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
-    stats['RAD'] = (df['RAD'].min(), df['RAD'].max(), df['RAD'].mean())
-    stats['TAX'] = (df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-    stats['PTRATIO'] = (df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
-    stats['B'] = (df['B'].min(), df['B'].max(), df['B'].mean())
-    stats['LSTAT'] = (df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
-    stats['MEDV'] = (df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-    return stats
-
-# Function to get slider values from the dataset description stats
-def get_slider_values(stat):
-    return stat[0], stat[1], stat[2]
-
 # Function to describe the attribute information
 def describe_attributes():
     st.write("## Data Set Characteristics")
@@ -130,6 +104,7 @@ def explore_data(df):
     st.write("#### Scatter Plot")
     fig, ax = plt.subplots()
     ax.scatter(df['RM'], df['MEDV'])
+    ax.set_xlabel('RM: Average number of rooms per dwelling')
     ax.set_xlabel('RM: Average number of rooms per dwelling')
     ax.set_ylabel('Median value of owner-occupied homes in $1000s')
     st.pyplot(fig)
@@ -196,7 +171,7 @@ def train_model(df):
     st.write("#### Model Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model, "housing_prediction/LinearRegression.pkl")
+    save_model(model, "LinearRegression.pkl")
     return model
 
 # Function to train and evaluate the Random Forest model
@@ -220,7 +195,7 @@ def train_model_random_forest(df):
     st.write("#### Model Random Forest Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model_rf, "housing_prediction/RandomForest.pkl")
+    save_model(model_rf, "RandomForest.pkl")
     return model_rf
 
 # Function to predict house prices using Linear Regression
@@ -280,65 +255,37 @@ def main():
         st.write("**Enter the following features to get the predicted price:**")
         input_col1, input_col2 = st.columns(2)
 
-        stats = get_dataset_stats(df)
-
         with input_col1:
             st.write("**CRIM**:")
-            min_crim, max_crim, mean_crim = get_slider_values(stats['CRIM'])
-            crim = st.slider('crim', min_crim, max_crim, mean_crim)
-
+            crim = st.slider('crim', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
             st.write("**INDUS**:")
-            min_indus, max_indus, mean_indus = get_slider_values(stats['INDUS'])
-            indus = st.slider('indus', min_indus, max_indus, mean_indus)
-
+            indus = st.slider('indus', df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
             st.write("**NOX**:")
-            min_nox, max_nox, mean_nox = get_slider_values(stats['NOX'])
-            nox = st.slider('nox', min_nox, max_nox, mean_nox)
-
+            nox = st.slider('nox', df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
             st.write("**AGE**:")
-            min_age, max_age, mean_age = get_slider_values(stats['AGE'])
-            age = st.slider('age', min_age, max_age, mean_age)
-
+                        age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
             st.write("**RAD**:")
-            min_rad, max_rad, mean_rad = get_slider_values(stats['RAD'])
-            rad = st.slider('rad', min_rad, max_rad, mean_rad)
-
+            rad = st.slider('rad', df['RAD'].min(), df['RAD'].max(), df['RAD'].mean())
             st.write("**PTRATIO**:")
-            min_ptratio, max_ptratio, mean_ptratio = get_slider_values(stats['PTRATIO'])
-            ptratio = st.slider('ptratio', min_ptratio, max_ptratio, mean_ptratio)
-
+            ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
             st.write("**LSTAT**:")
-            min_lstat, max_lstat, mean_lstat = get_slider_values(stats['LSTAT'])
-            lstat = st.slider('lstat', min_lstat, max_lstat, mean_lstat)
+            lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
 
         with input_col2:
             st.write("**ZN**:")
-            min_zn, max_zn, mean_zn = get_slider_values(stats['ZN'])
-            zn = st.slider('zn', min_zn, max_zn, mean_zn)
-
+            zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
             st.write("**CHAS**:")
-            min_chas, max_chas, mean_chas = get_slider_values(stats['CHAS'])
-            chas = st.slider('chas', min_chas, max_chas, mean_chas)
-
+            chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
             st.write("**RM**:")
-            min_rm, max_rm, mean_rm = get_slider_values(stats['RM'])
-            rm = st.slider('rm', min_rm, max_rm, mean_rm)
-
+            rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
             st.write("**DIS**:")
-            min_dis, max_dis, mean_dis = get_slider_values(stats['DIS'])
-            dis = st.slider('dis', min_dis, max_dis, mean_dis)
-
+            dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
             st.write("**TAX**:")
-            min_tax, max_tax, mean_tax = get_slider_values(stats['TAX'])
-            tax = st.slider('tax', min_tax, max_tax, mean_tax)
-
+            tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
             st.write("**B**:")
-            min_b, max_b, mean_b = get_slider_values(stats['B'])
-            b = st.slider('b', min_b, max_b, mean_b)
-
+            b = st.slider('b', df['B'].min(), df['B'].max(), df['B'].mean())
             st.write("**MEDV**:")
-            min_medv, max_medv, mean_medv = get_slider_values(stats['MEDV'])
-            medv = st.slider('medv', min_medv, max_medv, mean_medv)
+            medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
         visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv)
 
