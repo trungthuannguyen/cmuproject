@@ -13,6 +13,34 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 
+
+# Header
+st.markdown(
+    "<h1 style='text-align: center; font-size: 30px; background-color: red; color: #FFFFFF'; margin: 20px;padding: 20px;>"
+    "&nbsp; Welcome to Team3VN-CMU House Price Prediction &nbsp;"
+    "</h1>",
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    "<h2 style='text-align: center; font-size: 30px; background-color: #f2f2f2; line-height: 0.3;'>Predict House Prices</h2>",
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    "<h2 style='text-align: center; font-size: 26px; background-color: #f8f8f8; color: blue; line-height: 0.3;'>"
+    "Member: Dieu - Man - Sanh - Thuan - Tinh - Trinh"
+    "</h2>",
+    unsafe_allow_html=True
+)
+st.markdown(
+    "<h3 style='text-align: center; font-size: 26px; background-color: #f8f8f8; color: gray; line-height: 0.3;'>"
+    "CMU 2023"
+    "</h3>",
+    unsafe_allow_html=True
+)
+
+
 # Function to load the dataset
 @st.cache
 def load_data(file_path):
@@ -194,55 +222,6 @@ def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas
     st.pyplot(fig)
 
 def main():
-    # Header with logo
-    logo_path = "housing_prediction/team3vn_cmu.jpg"
-    # Center the logo on the page
-    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
-    with col1:
-        st.write("")
-    with col2:
-        st.write("")
-    with col3:
-        st.write("")
-    with col4:
-        st.image(logo_path, width=220, caption="")
-    with col5:
-        st.write("")
-    with col6:
-        st.write("")
-    with col7:
-        st.write("")
-    with col8:
-        st.write("")
-    with col9:
-        st.write("")
-
-    # Header
-    st.markdown(
-        "<h1 style='text-align: center; font-size: 30px; background-color: red; color: #FFFFFF'; margin: 20px;padding: 20px;>"
-        "&nbsp; Welcome to Team3VN-CMU House Price Prediction &nbsp;"
-        "</h1>",
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        "<h2 style='text-align: center; font-size: 30px; background-color: #f2f2f2; line-height: 0.3;'>Predict House Prices</h2>",
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        "<h2 style='text-align: center; font-size: 26px; background-color: #f8f8f8; color: blue; line-height: 0.3;'>"
-        "Member: Dieu - Man - Sanh - Thuan - Tinh - Trinh"
-        "</h2>",
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        "<h3 style='text-align: center; font-size: 26px; background-color: #f8f8f8; color: gray; line-height: 0.3;'>"
-        "CMU 2023"
-        "</h3>",
-        unsafe_allow_html=True
-    )
-
     st.write("**Upload the dataset file (CSV format)**")
     uploaded_file = st.file_uploader("Choose a file", type=["csv"])
 
@@ -257,8 +236,9 @@ def main():
         st.write("**Enter the following features to get the predicted price:**")
         input_col1, input_col2 = st.columns(2)
 
+        description_df = pd.read_csv('housing_prediction/Dataset_Description.csv')
+
         with input_col1:
-            description_df = pd.read_csv('housing_prediction/Dataset_Description.csv')
             for i, feature in enumerate(description_df['Attribute']):
                 min_val = description_df['Min'][i]
                 max_val = description_df['Max'][i]
