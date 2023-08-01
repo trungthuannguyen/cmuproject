@@ -1,17 +1,3 @@
-numpy
-pandas
-pandas-datareader
-matplotlib
-seaborn
-plotly
-Pillow
-scipy
-statsmodels
-scikit-learn
-streamlit
-streamlit-option-menu
-tensorflow
-yfinance
 pandas==1.1.5
 numpy==1.19.5
 seaborn==0.12.2
