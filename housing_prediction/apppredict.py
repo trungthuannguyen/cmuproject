@@ -230,12 +230,13 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
     plt.show()
     st.pyplot(fig)
 
-def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv):
-    features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'PTRATIO', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B_1000', 'MEDV']
-    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+# Function to visualize the selected feature values using a bar chart
+def visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv):
+    features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B_1000', 'MEDV']
+    values = [crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv]
 
     fig, ax = plt.subplots()
-    ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo', 'yellow'])
+    ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo'])
     ax.set_xlabel('Features')
     ax.set_ylabel('Feature Value')
     ax.set_title('Selected Feature Values')
