@@ -270,7 +270,7 @@ def main():
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
-            # Update the value of ptratio
+            # Add ptratio to the list of values
             ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
 
         # Declare b_1000 here, outside of the input_col2 block
@@ -292,6 +292,7 @@ def main():
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
+        # Add ptratio to the list of values
         values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
         visualize_slider_values(*values)
 
