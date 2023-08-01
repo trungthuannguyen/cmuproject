@@ -258,7 +258,7 @@ def main():
         input_col1, input_col2 = st.columns(2)
 
         with input_col1:
-            description_df = pd.read_csv('Dataset_Description.csv')
+            description_df = pd.read_csv('housing_prediction/Dataset_Description.csv')
             for i, feature in enumerate(description_df['Attribute']):
                 min_val = description_df['Min'][i]
                 max_val = description_df['Max'][i]
