@@ -230,9 +230,9 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
     plt.show()
     st.pyplot(fig)
 
-def visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv):
+def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv):
     features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'PTRATIO', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B_1000', 'MEDV']
-    values = [crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
 
     fig, ax = plt.subplots()
     ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo', 'yellow'])
@@ -290,7 +290,8 @@ def main():
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
-        visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv)
+        values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+        visualize_slider_values(*values)
 
         submitted = st.button('Predict Price')
 
