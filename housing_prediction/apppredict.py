@@ -272,7 +272,7 @@ def main():
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
 
-        # Include 'ptratio' here to match the 14 features used for training the Random Forest model
+        # Include 'ptration' here to match the 14 features used for training the Random Forest model
         with input_col2:
             st.write("**ZN**:")
             zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
@@ -284,12 +284,13 @@ def main():
             dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
             st.write("**TAX**:")
             tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-            st.write("**MEDV**:")
-            medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-            # Include 'PTRATION' here
+            st.write("**PTRATION**:")
             ptration = st.slider('ptration', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
             # Update the value of b_1000
+            st.write("**B_1000**:")
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
+            st.write("**MEDV**:")
+            medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
         # Modify the input_data to include all 14 features for prediction
         input_data = np.array([[crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
