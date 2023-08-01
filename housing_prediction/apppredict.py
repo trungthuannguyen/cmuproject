@@ -288,7 +288,7 @@ def main():
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
             # Update the value of b_1000
-            b_1000 = st.slider('b_100', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
+            b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
         visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv)
 
