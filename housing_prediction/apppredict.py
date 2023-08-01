@@ -86,7 +86,7 @@ def describe_attributes():
     st.write("- DIS: Weighted distances to five Boston employment centers")
     st.write("- RAD: Index of accessibility to radial highways")
     st.write("- TAX: Full-value property tax rate per $10,000")
-    st.write("- PTRATIO: Pupil-teacher ratio by town")
+    st.write("- PTRATION: Pupil-teacher ratio by town")
     st.write("- B: 1000(Bk - 0.63)^2 where Bk is the proportion of Black people by town")
     st.write("- LSTAT: Percentage of lower status of the population")
     st.write("- MEDV: Median value of owner-occupied homes in $1000s")
@@ -286,15 +286,15 @@ def main():
             tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-            # Include 'PTRATIO' here
-            ptratio = st.slider('ptratio', df['Pupil_Teacher_Ratio'].min(), df['Pupil_Teacher_Ratio'].max(), df['Pupil_Teacher_Ratio'].mean())
+            # Include 'PTRATION' here
+            ptration = st.slider('ptration', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
         # Modify the input_data to include all 14 features for prediction
-        input_data = np.array([[crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
+        input_data = np.array([[crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
 
-        values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+        values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
         visualize_slider_values(*values)
 
         submitted = st.button('Predict Price')
