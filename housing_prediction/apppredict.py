@@ -287,7 +287,7 @@ def main():
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
             # Include 'PTRATIO' here
-            ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
+            ptratio = st.slider('ptratio', df['Pupil_Teacher_Ratio'].min(), df['Pupil_Teacher_Ratio'].max(), df['Pupil_Teacher_Ratio'].mean())
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
