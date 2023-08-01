@@ -201,8 +201,6 @@ def main():
             st.write("**B**:")
             b = st.slider('B', df['B'].min(), df['B'].max(), df['B'].mean())
             st.write("**LSTAT**:")
-            lstat = st.slider('LSTAT', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean
-            st.write("**LSTAT**:")
             lstat = st.slider('LSTAT', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
             st.write("**MEDV**:")
             medv = st.slider('MEDV', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
