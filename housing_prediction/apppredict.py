@@ -270,7 +270,7 @@ def main():
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
-            # Add ptratio to the list of values
+            # Fix the column name to 'PTRATIO'
             ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
 
         # Declare b_1000 here, outside of the input_col2 block
