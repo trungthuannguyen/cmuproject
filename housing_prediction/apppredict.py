@@ -232,7 +232,7 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv):
     features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'PTRATIO', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B_1000', 'MEDV']
-    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_100, medv]
+    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
 
     fig, ax = plt.subplots()
     ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo', 'yellow'])
@@ -268,8 +268,8 @@ def main():
             age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
             st.write("**RAD**:")
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
-            st.write("**B_100**:")
-            b_100 = st.slider('b_100', df['B_100'].min(), df['B_100'].max(), df['B_100'].mean())
+            st.write("**B_1000**:")
+            b_1000 = st.slider('b_100', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
 
@@ -287,12 +287,12 @@ def main():
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
-        visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_100, medv)
+        visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv)
 
         submitted = st.button('Predict Price')
 
         if submitted:
-            input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, b_100, lstat, medv]])
+            input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, b_1000, lstat, medv]])
             prediction_lr = predict_price_linear_regression(model_lr, input_data)
             st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
 
