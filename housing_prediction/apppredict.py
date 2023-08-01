@@ -68,7 +68,7 @@ def load_data(file_path):
     return pd.read_csv(file_path)
 
 # Function to describe the attribute information
-def describe_attributes(df):
+def describe_attributes():
     st.write("## Data Set Characteristics")
     st.write("- The Boston Housing dataset contains information about various features of houses in Boston.")
     st.write("- It includes attributes such as per capita crime rate, proportion of residential land zoned for lots over 25,000 sq.ft., average number of rooms per dwelling, etc.")
@@ -94,7 +94,7 @@ def describe_attributes(df):
 
 # Function to explore the dataset
 def explore_data(df):
-    describe_attributes(df)
+    describe_attributes()
     st.write("### Dataset Summary")
     st.write(df.head())
     st.write("### Dataset Shape")
