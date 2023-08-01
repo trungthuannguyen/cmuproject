@@ -268,11 +268,10 @@ def main():
             age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
             st.write("**RAD**:")
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
+            st.write("**B_1000**:")
+            b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
-
-        # Declare b_1000 here, outside of the input_col2 block
-        b_1000 = 0  # Replace 0 with the desired initial value
 
         with input_col2:
             st.write("**ZN**:")
@@ -287,11 +286,8 @@ def main():
             tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-            # Update the value of b_1000
-            b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
-        values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
-        visualize_slider_values(*values)
+        visualize_slider_values(crim, indus, nox, age, rad, df['PTRATIO'].mean(), lstat, zn, chas, rm, dis, tax, b_1000, medv)
 
         submitted = st.button('Predict Price')
 
