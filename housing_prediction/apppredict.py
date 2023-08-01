@@ -272,7 +272,7 @@ def main():
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
 
-        # Include 'ptratio' here to match the 13 features used for training
+        # Include 'ptratio' here to match the 14 features used for training the Random Forest model
         with input_col2:
             st.write("**ZN**:")
             zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
@@ -291,7 +291,7 @@ def main():
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
-        # Modify the input_data to include all 13 features for prediction
+        # Modify the input_data to include all 14 features for prediction
         input_data = np.array([[crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
 
         values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
