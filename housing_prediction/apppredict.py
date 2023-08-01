@@ -267,7 +267,7 @@ def main():
             st.write("**AGE**:")
             age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
             st.write("**RAD**:")
-            rad = st.slider('rad', df['RAD'].min(), df['RAD'].max(), df['RAD'].mean())
+            rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
             st.write("**PTRATIO**:")
             ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
             st.write("**LSTAT**:")
