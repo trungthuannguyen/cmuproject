@@ -79,7 +79,8 @@ def explore_data(df):
     st.write("### Dataset Shape")
     st.write(df.shape)
     st.write("### Dataset Description")
-    st.write(df.describe())
+    description = df.describe()
+    st.write(description)
 
     # Data visualization
     st.write("### Data Visualization")
@@ -209,7 +210,41 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
     plt.show()
     st.pyplot(fig)
 
-def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv):
+def visualize_slider_values(input_col1, input_col2):
+    st.write("**Enter the following features to get the predicted price:**")
+
+    # Display input_col1 sliders
+    st.write("**CRIM**:")
+    crim = st.slider('crim', input_col1[0], input_col1[1], input_col1[2])
+    st.write("**INDUS**:")
+    indus = st.slider('indus', input_col1[0], input_col1[1], input_col1[3])
+    st.write("**NOX**:")
+    nox = st.slider('nox', input_col1[0], input_col1[1], input_col1[4])
+    st.write("**AGE**:")
+    age = st.slider('age', input_col1[0], input_col1[1], input_col1[5])
+    st.write("**RAD**:")
+    rad = st.slider('rad', input_col1[0], input_col1[1], input_col1[6])
+    st.write("**PTRATIO**:")
+    ptratio = st.slider('ptratio', input_col1[0], input_col1[1], input_col1[7])
+    st.write("**LSTAT**:")
+    lstat = st.slider('lstat', input_col1[0], input_col1[1], input_col1[8])
+
+    # Display input_col2 sliders
+    st.write("**ZN**:")
+    zn = st.slider('zn', input_col2[0], input_col2[1], input_col2[0])
+    st.write("**CHAS**:")
+    chas = st.slider('chas', input_col2[0], input_col2[1], input_col2[1])
+    st.write("**RM**:")
+    rm = st.slider('rm', input_col2[0], input_col2[1], input_col2[2])
+    st.write("**DIS**:")
+    dis = st.slider('dis', input_col2[0], input_col2[1], input_col2[3])
+    st.write("**TAX**:")
+    tax = st.slider('tax', input_col2[0], input_col2[1], input_col2[4])
+    st.write("**B**:")
+    b = st.slider('b', input_col2[0], input_col2[1], input_col2[5])
+    st.write("**MEDV**:")
+    medv = st.slider('medv', input_col2[0], input_col2[1], input_col2[6])
+
     features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'PTRATIO', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B', 'MEDV']
     values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv]
 
@@ -221,17 +256,6 @@ def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas
     ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
 
-# Function to create and save the Dataset_Description.csv file
-def create_dataset_description():
-    data = {
-        "Attribute": ["CRIM", "ZN", "INDUS", "CHAS", "NOX", "RM", "AGE", "DIS", "RAD", "TAX", "PTRATIO", "B", "LSTAT", "MEDV"],
-        "Min": [0.0, 0.0, 0.0, 0.0, 0.385, 3.561, 1.137, 1.1296, 1.0, 20.2, 12.6, 0.32, 1.73, 5.0],
-        "Max": [9.9665, 100.0, 27.74, 1.0, 7.313, 100.0, 100.0, 24.0, 666.0, 711.0, 22.0, 19.99, 37.97, 50.0],
-        "Mean": [0.1447, 11.36, 6.96, 0.0692, 0.583, 6.3225, 65.25, 3.92585, 5.0, 307.0, 18.6, 11.44, 11.36, 21.2]
-    }
-    df = pd.DataFrame(data)
-    df.to_csv("housing_prediction/Dataset_Description.csv", index=False)
-
 def main():
     st.write("**Upload the dataset file (CSV format)**")
     uploaded_file = st.file_uploader("Choose a file", type=["csv"])
@@ -241,36 +265,60 @@ def main():
         explore_data(df)
         model_lr = train_model(df)
         model_rf = train_model_random_forest(df)
-        
+
         st.write("### House Price Prediction")
 
-        st.write("**Enter the following features to get the predicted price:**")
         input_col1, input_col2 = st.columns(2)
 
-        description_df = pd.read_csv('housing_prediction/Dataset_Description.csv')
+        # Get values from the Dataset Description
+        min_values = df.describe().loc['min']
+        max_values = df.describe().loc['max']
+        mean_values = df.describe().loc['mean']
 
+        # Display sliders with values from the Dataset Description
         with input_col1:
-            for i, feature in enumerate(description_df['Attribute']):
-                min_val = description_df['Min'][i]
-                max_val = description_df['Max'][i]
-                default_val = description_df['Default'][i]
-                st.write(f"**{feature}**:")
-                description_df['Value'][i] = st.slider(feature.lower(), min_val, max_val, default_val)
+            st.write("**Minimum Values**")
+            st.write(min_values)
+            st.write("**CRIM**:")
+            crim_min = st.slider('crim', float(min_values['CRIM']), float(max_values['CRIM']), float(mean_values['CRIM']))
+            st.write("**INDUS**:")
+            indus_min = st.slider('indus', float(min_values['INDUS']), float(max_values['INDUS']), float(mean_values['INDUS']))
+            st.write("**NOX**:")
+            nox_min = st.slider('nox', float(min_values['NOX']), float(max_values['NOX']), float(mean_values['NOX']))
+            st.write("**AGE**:")
+            age_min = st.slider('age', float(min_values['AGE']), float(max_values['AGE']), float(mean_values['AGE']))
+            st.write("**RAD**:")
+            rad_min = st.slider('rad', float(min_values['RAD']), float(max_values['RAD']), float(mean_values['RAD']))
+            st.write("**PTRATIO**:")
+            ptratio_min = st.slider('ptratio', float(min_values['PTRATIO']), float(max_values['PTRATIO']), float(mean_values['PTRATIO']))
+            st.write("**LSTAT**:")
+            lstat_min = st.slider('lstat', float(min_values['LSTAT']), float(max_values['LSTAT']), float(mean_values['LSTAT']))
 
         with input_col2:
-            for i, feature in enumerate(description_df['Attribute']):
-                min_val = description_df['Min'][i]
-                max_val = description_df['Max'][i]
-                default_val = description_df['Default'][i]
-                st.write(f"**{feature}**:")
-                description_df['Value'][i] = st.slider(feature.lower(), min_val, max_val, default_val)
+            st.write("**Maximum Values**")
+            st.write(max_values)
+            st.write("**ZN**:")
+            zn_max = st.slider('zn', float(min_values['ZN']), float(max_values['ZN']), float(mean_values['ZN']))
+            st.write("**CHAS**:")
+            chas_max = st.slider('chas', float(min_values['CHAS']), float(max_values['CHAS']), float(mean_values['CHAS']))
+            st.write("**RM**:")
+            rm_max = st.slider('rm', float(min_values['RM']), float(max_values['RM']), float(mean_values['RM']))
+            st.write("**DIS**:")
+            dis_max = st.slider('dis', float(min_values['DIS']), float(max_values['DIS']), float(mean_values['DIS']))
+            st.write("**TAX**:")
+            tax_max = st.slider('tax', float(min_values['TAX']), float(max_values['TAX']), float(mean_values['TAX']))
+            st.write("**B**:")
+            b_max = st.slider('b', float(min_values['B']), float(max_values['B']), float(mean_values['B']))
+            st.write("**MEDV**:")
+            medv_max = st.slider('medv', float(min_values['MEDV']), float(max_values['MEDV']), float(mean_values['MEDV']))
 
-        visualize_slider_values(*description_df['Value'].values)
+        visualize_slider_values([float(min_values['CRIM']), float(max_values['INDUS']), float(max_values['NOX']), float(max_values['AGE']), float(max_values['RAD']), float(max_values['PTRATIO']), float(max_values['LSTAT'])],
+                                [float(min_values['ZN']), float(max_values['CHAS']), float(max_values['RM']), float(max_values['DIS']), float(max_values['TAX']), float(max_values['B']), float(max_values['MEDV'])])
 
         submitted = st.button('Predict Price')
 
         if submitted:
-            input_data = np.array([description_df['Value'].values])
+            input_data = np.array([[crim_min, zn_max, indus_min, chas_max, nox_min, rm_max, age_min, dis_max, rad_min, tax_max, ptratio_min, b_max, lstat_min, medv_max]])
             prediction_lr = predict_price_linear_regression(model_lr, input_data)
             st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
 
