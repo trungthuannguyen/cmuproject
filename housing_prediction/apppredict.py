@@ -221,6 +221,17 @@ def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas
     ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
 
+# Function to create and save the Dataset_Description.csv file
+def create_dataset_description():
+    data = {
+        "Attribute": ["CRIM", "ZN", "INDUS", "CHAS", "NOX", "RM", "AGE", "DIS", "RAD", "TAX", "PTRATIO", "B", "LSTAT", "MEDV"],
+        "Min": [0.0, 0.0, 0.0, 0.0, 0.385, 3.561, 1.137, 1.1296, 1.0, 20.2, 12.6, 0.32, 1.73, 5.0],
+        "Max": [9.9665, 100.0, 27.74, 1.0, 7.313, 100.0, 100.0, 24.0, 666.0, 711.0, 22.0, 19.99, 37.97, 50.0],
+        "Mean": [0.1447, 11.36, 6.96, 0.0692, 0.583, 6.3225, 65.25, 3.92585, 5.0, 307.0, 18.6, 11.44, 11.36, 21.2]
+    }
+    df = pd.DataFrame(data)
+    df.to_csv("housing_prediction/Dataset_Description.csv", index=False)
+
 def main():
     st.write("**Upload the dataset file (CSV format)**")
     uploaded_file = st.file_uploader("Choose a file", type=["csv"])
