@@ -289,19 +289,24 @@ def main():
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
+        # Modify the input_data to include only the relevant 13 features for prediction
+        input_data = np.array([[crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
+
         values = [crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv]
         visualize_slider_values(*values)
 
         submitted = st.button('Predict Price')
 
         if submitted:
-            input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, b_1000, lstat, medv]])
+            # Perform the prediction using the linear regression model
             prediction_lr = predict_price_linear_regression(model_lr, input_data)
             st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
 
+            # Perform the prediction using the random forest model
             prediction_rf = predict_price_random_forest(model_rf, input_data)
             st.write("### **Predicted House Price using Random Forest:**", prediction_rf)
 
+            # Visualize the predicted prices using a pie chart
             visualize_prediction_pie(prediction_lr, prediction_rf)
 
 if __name__ == "__main__":
