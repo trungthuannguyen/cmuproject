@@ -332,7 +332,7 @@ def main():
             min_tax, max_tax, mean_tax = get_slider_values(stats['TAX'])
             tax = st.slider('tax', min_tax, max_tax, mean_tax)
 
-                        st.write("**B**:")
+            st.write("**B**:")
             min_b, max_b, mean_b = get_slider_values(stats['B'])
             b = st.slider('b', min_b, max_b, mean_b)
 
