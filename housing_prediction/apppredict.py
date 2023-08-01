@@ -4,17 +4,13 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pickle
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV
-import seaborn as sns
 
 # Header with logo
-logo_path = "team3vn_cmu.jpg"
+logo_path = "housing_prediction/team3vn_cmu.jpg"
 # Center the logo on the page
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 with col1:
@@ -121,30 +117,18 @@ def explore_data(df):
     st.write("#### Correlation Heatmap")
     corr_matrix = df.corr()
     fig, ax = plt.subplots()
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+    ax.imshow(corr_matrix, cmap='coolwarm', aspect='auto')
+    ax.set_xticks(np.arange(len(corr_matrix.columns)))
+    ax.set_yticks(np.arange(len(corr_matrix.columns)))
+    ax.set_xticklabels(corr_matrix.columns, rotation=45, ha='right')
+    ax.set_yticklabels(corr_matrix.columns)
     st.pyplot(fig)
 
     st.write("#### Box Plot")
     fig, ax = plt.subplots()
-    sns.boxplot(data=df, orient='h', palette='Set2')
-    st.pyplot(fig)
-
-    st.write("#### Pair Plot")
-    fig = sns.pairplot(df, diag_kind='kde')
-    st.pyplot(fig)
-
-    st.write("#### Bar Plot")
-    fig, ax = plt.subplots()
-    df['RAD'].value_counts().sort_index().plot(kind='bar')
-    ax.set_xlabel('RAD: Index of accessibility to radial highways')
-    ax.set_ylabel('Count')
-    st.pyplot(fig)
-
-    st.write("#### KDE Plot")
-    fig, ax = plt.subplots()
-    sns.kdeplot(data=df['DIS'], shade=True)
-    ax.set_xlabel('DIS: Weighted distances to five Boston employment centers')
-    ax.set_ylabel('Density')
+    ax.boxplot(df.drop('MEDV', axis=1).values, vert=False, labels=df.drop('MEDV', axis=1).columns)
+    ax.set_xlabel('Values')
+    ax.set_title('Box Plot for Input Features')
     st.pyplot(fig)
 
 # Function to save the trained model
@@ -158,7 +142,6 @@ def train_model(df):
 
     X = df.drop('MEDV', axis=1)
     y = df['MEDV']
-
     # Impute missing values
     imputer = SimpleImputer(strategy='mean')
     X = imputer.fit_transform(X)
@@ -173,7 +156,7 @@ def train_model(df):
     st.write("#### Model Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model, "LinearRegression.pkl")
+    save_model(model, "housing_prediction/LinearRegression.pkl")
     return model
 
 # Function to train and evaluate the Random Forest model
@@ -197,7 +180,7 @@ def train_model_random_forest(df):
     st.write("#### Model Random Forest Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model_rf, "RandomForest.pkl")
+    save_model(model_rf, "housing_prediction/RandomForest.pkl")
     return model_rf
 
 # Function to predict house prices using Linear Regression
@@ -251,7 +234,7 @@ def main():
         explore_data(df)
         model_lr = train_model(df)
         model_rf = train_model_random_forest(df)
-        
+
         st.write("### House Price Prediction")
 
         st.write("**Enter the following features to get the predicted price:**")
