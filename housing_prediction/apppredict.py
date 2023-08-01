@@ -270,12 +270,8 @@ def main():
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
-            # Fix the column name to 'PTRATIO'
-            ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
 
-        # Declare b_1000 here, outside of the input_col2 block
-        b_1000 = 0  # Replace 0 with the desired initial value
-
+        # Modify the column name to the correct one in your dataset
         with input_col2:
             st.write("**ZN**:")
             zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
@@ -292,8 +288,7 @@ def main():
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
-        # Add ptratio to the list of values
-        values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+        values = [crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv]
         visualize_slider_values(*values)
 
         submitted = st.button('Predict Price')
