@@ -232,7 +232,7 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 def visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv):
     features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'PTRATIO', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B_1000', 'MEDV']
-    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv]
+    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_100, medv]
 
     fig, ax = plt.subplots()
     ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo', 'yellow'])
@@ -269,7 +269,7 @@ def main():
             st.write("**RAD**:")
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
             st.write("**B_100**:")
-            b = st.slider('b_100', df['B_100'].min(), df['B_100'].max(), df['B_100'].mean())
+            b_100 = st.slider('b_100', df['B_100'].min(), df['B_100'].max(), df['B_100'].mean())
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
 
