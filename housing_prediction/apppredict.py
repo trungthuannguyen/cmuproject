@@ -270,6 +270,8 @@ def main():
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
+            st.write("**B-1000**:")
+            b = st.slider('b', df['B'].min(), df['B'].max(), df['B'].mean())
 
         with input_col2:
             st.write("**ZN**:")
@@ -285,12 +287,12 @@ def main():
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
-        visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, medv)
+        visualize_slider_values(crim, indus, nox, age, rad, lstat, b, zn, chas, rm, dis, tax, medv)
 
         submitted = st.button('Predict Price')
 
         if submitted:
-            input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, lstat, medv]])
+            input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, b, lstat, medv]])
             prediction_lr = predict_price_linear_regression(model_lr, input_data)
             st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
 
