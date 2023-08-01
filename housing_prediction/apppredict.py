@@ -67,6 +67,29 @@ st.markdown(
 def load_data(file_path):
     return pd.read_csv(file_path)
 
+# Function to get min, max, and mean values from the dataset description
+def get_dataset_stats(df):
+    stats = {}
+    stats['CRIM'] = (df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
+    stats['ZN'] = (df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
+    stats['INDUS'] = (df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
+    stats['CHAS'] = (df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
+    stats['NOX'] = (df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
+    stats['RM'] = (df['RM'].min(), df['RM'].max(), df['RM'].mean())
+    stats['AGE'] = (df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
+    stats['DIS'] = (df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
+    stats['RAD'] = (df['RAD'].min(), df['RAD'].max(), df['RAD'].mean())
+    stats['TAX'] = (df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
+    stats['PTRATIO'] = (df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
+    stats['B'] = (df['B'].min(), df['B'].max(), df['B'].mean())
+    stats['LSTAT'] = (df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
+    stats['MEDV'] = (df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
+    return stats
+
+# Function to get slider values from the dataset description stats
+def get_slider_values(stat):
+    return stat[0], stat[1], stat[2]
+
 # Function to describe the attribute information
 def describe_attributes():
     st.write("## Data Set Characteristics")
@@ -165,7 +188,7 @@ def train_model(df):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    model = LinearRegression()
+        model = LinearRegression()
     model.fit(X_train, y_train)
 
     y_pred = model.predict(X_test)
@@ -257,37 +280,65 @@ def main():
         st.write("**Enter the following features to get the predicted price:**")
         input_col1, input_col2 = st.columns(2)
 
+        stats = get_dataset_stats(df)
+
         with input_col1:
             st.write("**CRIM**:")
-            crim = st.slider('crim', 0.0, 9.9665, 0.1447)
+            min_crim, max_crim, mean_crim = get_slider_values(stats['CRIM'])
+            crim = st.slider('crim', min_crim, max_crim, mean_crim)
+
             st.write("**INDUS**:")
-            indus = st.slider('indus', 0.0, 27.74, 6.96)
+            min_indus, max_indus, mean_indus = get_slider_values(stats['INDUS'])
+            indus = st.slider('indus', min_indus, max_indus, mean_indus)
+
             st.write("**NOX**:")
-            nox = st.slider('nox', 0.385, 7.313, 0.583)
+            min_nox, max_nox, mean_nox = get_slider_values(stats['NOX'])
+            nox = st.slider('nox', min_nox, max_nox, mean_nox)
+
             st.write("**AGE**:")
-            age = st.slider('age', 1.137, 100.0, 65.25)
+            min_age, max_age, mean_age = get_slider_values(stats['AGE'])
+            age = st.slider('age', min_age, max_age, mean_age)
+
             st.write("**RAD**:")
-            rad = st.slider('rad', 1.0, 666.0, 5.0)
+            min_rad, max_rad, mean_rad = get_slider_values(stats['RAD'])
+            rad = st.slider('rad', min_rad, max_rad, mean_rad)
+
             st.write("**PTRATIO**:")
-            ptratio = st.slider('ptratio', 12.6, 22.0, 18.6)
+            min_ptratio, max_ptratio, mean_ptratio = get_slider_values(stats['PTRATIO'])
+            ptratio = st.slider('ptratio', min_ptratio, max_ptratio, mean_ptratio)
+
             st.write("**LSTAT**:")
-            lstat = st.slider('lstat', 1.73, 37.97, 11.36)
+            min_lstat, max_lstat, mean_lstat = get_slider_values(stats['LSTAT'])
+            lstat = st.slider('lstat', min_lstat, max_lstat, mean_lstat)
 
         with input_col2:
             st.write("**ZN**:")
-            zn = st.slider('zn', 0.0, 100.0, 0.0)
+            min_zn, max_zn, mean_zn = get_slider_values(stats['ZN'])
+            zn = st.slider('zn', min_zn, max_zn, mean_zn)
+
             st.write("**CHAS**:")
-            chas = st.slider('chas', 0.0, 1.0, 0.0)
+            min_chas, max_chas, mean_chas = get_slider_values(stats['CHAS'])
+            chas = st.slider('chas', min_chas, max_chas, mean_chas)
+
             st.write("**RM**:")
-            rm = st.slider('rm', 3.561, 100.0, 6.3225)
+            min_rm, max_rm, mean_rm = get_slider_values(stats['RM'])
+            rm = st.slider('rm', min_rm, max_rm, mean_rm)
+
             st.write("**DIS**:")
-            dis = st.slider('dis', 1.1296, 24.0, 3.92585)
+            min_dis, max_dis, mean_dis = get_slider_values(stats['DIS'])
+            dis = st.slider('dis', min_dis, max_dis, mean_dis)
+
             st.write("**TAX**:")
-            tax = st.slider('tax', 20.2, 711.0, 307.0)
-            st.write("**B**:")
-            b = st.slider('b', 0.32, 19.99, 11.44)
+            min_tax, max_tax, mean_tax = get_slider_values(stats['TAX'])
+            tax = st.slider('tax', min_tax, max_tax, mean_tax)
+
+                        st.write("**B**:")
+            min_b, max_b, mean_b = get_slider_values(stats['B'])
+            b = st.slider('b', min_b, max_b, mean_b)
+
             st.write("**MEDV**:")
-            medv = st.slider('medv', 5.0, 50.0, 21.2)
+            min_medv, max_medv, mean_medv = get_slider_values(stats['MEDV'])
+            medv = st.slider('medv', min_medv, max_medv, mean_medv)
 
         visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv)
 
