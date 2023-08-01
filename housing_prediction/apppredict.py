@@ -1,8 +1,7 @@
 import pandas as pd
 import numpy as np
-import seaborn as sns
+import streamlit as st
 import matplotlib.pyplot as plt
-import streamlit as st 
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, Ridge
@@ -12,9 +11,10 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
+import seaborn as sns
 
 # Header with logo
-logo_path = "housing_prediction/team3vn_cmu.jpg"
+logo_path = "team3vn_cmu.jpg"
 # Center the logo on the page
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 with col1:
@@ -173,7 +173,7 @@ def train_model(df):
     st.write("#### Model Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model, "housing_prediction/LinearRegression.pkl")
+    save_model(model, "LinearRegression.pkl")
     return model
 
 # Function to train and evaluate the Random Forest model
@@ -197,7 +197,7 @@ def train_model_random_forest(df):
     st.write("#### Model Random Forest Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model_rf, "housing_prediction/RandomForest.pkl")
+    save_model(model_rf, "RandomForest.pkl")
     return model_rf
 
 # Function to predict house prices using Linear Regression
