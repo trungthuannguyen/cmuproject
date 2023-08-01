@@ -268,8 +268,8 @@ def main():
             age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
             st.write("**RAD**:")
             rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
-            st.write("**PTRATIO**:")
-            ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
+            st.write("**B**:")
+            b = st.slider('b', df['B'].min(), df['B'].max(), df['B'].mean())
             st.write("**LSTAT**:")
             lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
 
@@ -284,17 +284,15 @@ def main():
             dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
             st.write("**TAX**:")
             tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-            st.write("**B**:")
-            b = st.slider('b', df['B'].min(), df['B'].max(), df['B'].mean())
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
-        visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv)
+        visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b, medv)
 
         submitted = st.button('Predict Price')
 
         if submitted:
-            input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat, medv]])
+            input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, b, lstat, medv]])
             prediction_lr = predict_price_linear_regression(model_lr, input_data)
             st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
 
