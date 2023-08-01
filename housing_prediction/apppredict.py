@@ -156,7 +156,7 @@ def save_model(model, filename):
 def train_model(df):
     st.write("### Model Training and Evaluation")
 
-    X = df.drop('MEDV', axis=1)
+        X = df.drop('MEDV', axis=1)
     y = df['MEDV']
 
     # Impute missing values
@@ -291,7 +291,7 @@ def main():
 
         visualize_slider_values(crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b, medv)
 
-        submitted = st.button('Predict Price')
+                submitted = st.button('Predict Price')
 
         if submitted:
             input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat, medv]])
