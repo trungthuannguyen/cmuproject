@@ -233,21 +233,26 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 # Function to visualize the selected feature values using a bar chart
 def visualize_slider_values(df, values):
+    # List of features to be visualized
     features = ['LSTAT', 'INDUS', 'NOX', 'RM', 'TAX', 'DIS', 'AGE']
-    if 'PTRATION' in df.columns:
-        features.append('PTRATION')  # Include 'PTRATION' in the features list if it exists in the DataFrame
 
-    min_max_scaler = MinMaxScaler()  # Use MinMaxScaler from sklearn.preprocessing
+    # Include 'PTRATION' in the features list if it exists in the DataFrame
+    if 'PTRATION' in df.columns:
+        features.append('PTRATION')
+
+    # Scale the selected features using MinMaxScaler from sklearn.preprocessing
+    min_max_scaler = MinMaxScaler()
     x = df.loc[:, features]
     y = df['MEDV']
     x = pd.DataFrame(data=min_max_scaler.fit_transform(x), columns=features)
 
+    # Create subplots for each feature and plot regression lines
     fig, axs = plt.subplots(ncols=4, nrows=2, figsize=(20, 10))
     axs = axs.flatten()
     for i, feature in enumerate(features):
-        sns.regplot(y=y, x=x[feature], ax=axs[i])
+        sns.regplot(y=y, x=x[feature], ax=axs[i])  # Scatter plot with regression line for each feature
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
-    st.pyplot(fig)
+    st.pyplot(fig)  # Display the plot using Streamlit's st.pyplot()
     
 def main():
     st.write("**Upload the dataset file (CSV format)**")
