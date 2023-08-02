@@ -254,7 +254,7 @@ def visualize_slider_values(df, values):
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
 
     # Create a bold and distinct title for the content
-    st.write("### Relationship between Selected Features and House Prices")
+    st.markdown("### Relationship between Selected Features and House Prices")
 
     # Display the plot using Streamlit's st.pyplot()
     st.pyplot(fig)
