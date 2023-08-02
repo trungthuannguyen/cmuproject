@@ -121,7 +121,7 @@ def explore_data(df):
     st.write("#### Correlation Heatmap")
     corr_matrix = df.corr()
     fig, ax = plt.subplots()
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax, annot_kws={"size": 6})
     st.pyplot(fig)
 
     st.write("#### Box Plot")
