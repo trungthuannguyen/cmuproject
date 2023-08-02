@@ -203,10 +203,10 @@ def train_model_random_forest(df):
 # Function to predict house prices using Linear Regression
 def predict_price_linear_regression(model, input_data):
     # Ensure input_data has the same number of features as the training dataset
-    if input_data.shape[1] != model.coef_.shape[0]:
+    if len(input_data) != model.coef_.shape[0]:
         raise ValueError("Number of features in input data does not match the model")
 
-    prediction = model.predict(input_data)
+    prediction = model.predict([input_data])
     return prediction
 
 # Function to predict house prices using Random Forest
@@ -295,15 +295,15 @@ def main():
 
         if submitted:
             # Perform the prediction using the linear regression model
-            prediction_lr = predict_price_linear_regression(model_lr, np.array([values]))
+            prediction_lr = predict_price_linear_regression(model_lr, values)
             st.write("### **Predicted House Price using Linear Regression:**", prediction_lr[0])
     
             # Perform the prediction using the random forest model
-            prediction_rf = predict_price_random_forest(model_rf, np.array([values]))
+            prediction_rf = predict_price_random_forest(model_rf, values)
             st.write("### **Predicted House Price using Random Forest:**", prediction_rf[0])
     
             # Visualize the predicted prices using a pie chart
             visualize_prediction_pie(prediction_lr[0], prediction_rf[0])
-
+            
 if __name__ == "__main__":
     main()
