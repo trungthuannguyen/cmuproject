@@ -133,18 +133,23 @@ def explore_data(df):
     fig = sns.pairplot(df, diag_kind='kde')
     st.pyplot(fig)
 
-    st.write("#### Bar Plot")
-    fig, ax = plt.subplots()
-    df['RAD'].value_counts().sort_index().plot(kind='bar')
-    ax.set_xlabel('RAD: Index of accessibility to radial highways')
-    ax.set_ylabel('Count')
-    st.pyplot(fig)
-
     st.write("#### KDE Plot")
     fig, ax = plt.subplots()
     sns.kdeplot(data=df['DIS'], shade=True)
     ax.set_xlabel('DIS: Weighted distances to five Boston employment centers')
     ax.set_ylabel('Density')
+    st.pyplot(fig)
+
+    # Bar Plot for the 'RAD' feature
+    st.write("#### Bar Plot")
+    fig, ax = plt.subplots()
+    df['RAD'].value_counts().sort_index().plot(kind='bar')
+    ax.set_xlabel('RAD: Index of accessibility to radial highways')
+    ax.set_ylabel('Count')
+    # Add value above each bar
+    for p in ax.patches:
+        ax.annotate(f"{p.get_height()}", (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='center',
+                    xytext=(0, 5), textcoords='offset points', fontsize=8, fontweight='bold')
     st.pyplot(fig)
 
 # Function to save the trained model
@@ -257,24 +262,6 @@ def visualize_slider_values(df, values):
     st.markdown("### Relationship between Selected Features and House Prices")
 
     # Display the plot using Streamlit's st.pyplot()
-    st.pyplot(fig)
-    
-    # Display the value above each bar of the 'RAD' feature bar plot
-    fig, ax = plt.subplots()
-    df['RAD'].value_counts().sort_index().plot(kind='bar')
-    ax.set_xlabel('RAD: Index of accessibility to radial highways')
-    ax.set_ylabel('Count')
-    # Add value above each bar
-    for p in ax.patches:
-        ax.annotate(f"{p.get_height()}", (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='center',
-                    xytext=(0, 5), textcoords='offset points', fontsize=8, fontweight='bold')
-    st.pyplot(fig)
-
-    st.write("#### KDE Plot")
-    fig, ax = plt.subplots()
-    sns.kdeplot(data=df['DIS'], shade=True)
-    ax.set_xlabel('DIS: Weighted distances to five Boston employment centers')
-    ax.set_ylabel('Density')
     st.pyplot(fig)
     
 def main():
