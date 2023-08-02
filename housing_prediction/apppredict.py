@@ -231,9 +231,9 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
     st.pyplot(fig)
 
 # Function to visualize the selected feature values using a bar chart
-def visualize_slider_values(crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv):
-    features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'PTRATION','B_1000', 'MEDV']
-    values = [crim, indus, nox, age, rad, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+def visualize_slider_values(feature_values):
+    features = list(feature_values.keys())
+    values = list(feature_values.values())
 
     fig, ax = plt.subplots()
     ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo'])
@@ -276,25 +276,23 @@ with input_col1:
 b_1000 = 0  # Replace 0 with the desired initial value
 
 with input_col2:
-    st.write("**ZN**:")
-    zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
-    st.write("**CHAS**:")
-    chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
-    st.write("**RM**:")
-    rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
-    st.write("**DIS**:")
-    dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
-    st.write("**TAX**:")
-    tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-    st.write("**MEDV**:")
-    medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-    # Update the value of b_1000
-    b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
-    # Use PTRATION instead of PTRATIO
-    ptratio = st.slider('ptratio', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
+        st.write("**ZN**:")
+        zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
+        st.write("**CHAS**:")
+        chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
+        st.write("**RM**:")
+        rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
+        st.write("**DIS**:")
+        dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
+        st.write("**TAX**:")
+        tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
+        st.write("**MEDV**:")
+        medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
+        ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
 
-values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
-visualize_slider_values(*values)
+    feature_values = {'crim': crim, 'indus': indus, 'nox': nox, 'age': age, 'rad': rad, 'ptratio': ptratio, 'lstat': lstat,
+                      'zn': zn, 'chas': chas, 'rm': rm, 'dis': dis, 'tax': tax, 'medv': medv, 'b_1000': b_1000}
+    visualize_slider_values(feature_values)
 
         submitted = st.button('Predict Price')
 
