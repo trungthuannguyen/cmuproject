@@ -232,7 +232,7 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
     st.pyplot(fig)
 
 # Function to visualize the selected feature values using a bar chart
-def visualize_slider_values(values):
+def visualize_slider_values(df, values):
     features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'PTRATION', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B_1000', 'MEDV']
     fig, ax = plt.subplots()
     ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo', 'yellow'])
@@ -301,7 +301,7 @@ def main():
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
         values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
-        visualize_slider_values(values)
+        visualize_slider_values(df, values)
 
         submitted = st.button('Predict Price')
 
