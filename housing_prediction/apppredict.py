@@ -233,24 +233,17 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 # Function to visualize the selected feature values using a bar chart
 def visualize_slider_values(df, values):
-    features = ['CRIM', 'INDUS', 'NOX', 'AGE', 'RAD', 'PTRATION', 'LSTAT', 'ZN', 'CHAS', 'RM', 'DIS', 'TAX', 'B_1000', 'MEDV']
-    fig, ax = plt.subplots()
-    ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo', 'yellow'])
-    ax.set_xlabel('Features')
-    ax.set_ylabel('Feature Value')
-    ax.set_title('Selected Feature Values')
-    ax.tick_params(axis='x', rotation=45)
-    st.pyplot(fig)
+    features = ['LSTAT', 'INDUS', 'NOX', 'PTRATIO', 'RM', 'TAX', 'DIS', 'AGE']
+    min_max_scaler = preprocessing.MinMaxScaler()
+    x = df.loc[:, features]
+    y = df['MEDV']
+    x = pd.DataFrame(data=min_max_scaler.fit_transform(x), columns=features)
 
-    # Bar plot of selected features against MEDV
-    features = ['LSTAT', 'INDUS', 'RM', 'TAX', 'NOX', 'PTRATION']
-    fig, ax = plt.subplots()
-    for feature in features:
-        sns.barplot(x=feature, y='MEDV', data=df, ax=ax)
-    ax.set_xlabel('Features')
-    ax.set_ylabel('MEDV')
-    ax.set_title('Selected Features vs MEDV')
-    ax.tick_params(axis='x', rotation=45)
+    fig, axs = plt.subplots(ncols=4, nrows=2, figsize=(20, 10))
+    axs = axs.flatten()
+    for i, feature in enumerate(features):
+        sns.regplot(y=y, x=x[feature], ax=axs[i])
+    plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
     st.pyplot(fig)
 
 def main():
