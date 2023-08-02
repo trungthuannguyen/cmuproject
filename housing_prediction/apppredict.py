@@ -263,7 +263,24 @@ def visualize_slider_values(df, values):
 
     # Display the plot using Streamlit's st.pyplot()
     st.pyplot(fig)
+
+# ##########
+def process_prediction_results(df, prediction_lr, prediction_rf, top_n=5):
+    # Create a new DataFrame to store the original data and the predicted prices
+    prediction_df = df.copy()
+    prediction_df['Predicted Price (Linear Regression)'] = prediction_lr
+    prediction_df['Predicted Price (Random Forest)'] = prediction_rf
     
+    # Sort the DataFrame based on the predicted prices in descending order
+    prediction_df.sort_values(by='Predicted Price (Random Forest)', ascending=False, inplace=True)
+    
+    # Select the top N rows as the most promising types
+    most_promising_types = prediction_df.head(top_n)
+    
+    # Display the table of the most promising types
+    st.write("### Most Promising Types")
+    st.write(most_promising_types)
+
 def main():
     st.write("**Upload the dataset file (CSV format)**")
     uploaded_file = st.file_uploader("Choose a file", type=["csv"])
