@@ -265,21 +265,24 @@ def visualize_slider_values(df, values):
     st.pyplot(fig)
 
 # ##########
-def process_prediction_results(df, prediction_lr, prediction_rf, top_n=5):
-    # Create a new DataFrame to store the original data and the predicted prices
+# Function to process and display the most promising types
+def process_prediction_results(df, prediction_lr, prediction_rf):
+    # Create a new DataFrame to store the predictions
     prediction_df = df.copy()
-    prediction_df['Predicted Price (Linear Regression)'] = prediction_lr
+
+    # Repeat the scalar prediction to match the length of the DataFrame
+    prediction_lr_array = np.repeat(prediction_lr, len(df))
+
+    # Add the predictions to the DataFrame
+    prediction_df['Predicted Price (Linear Regression)'] = prediction_lr_array
     prediction_df['Predicted Price (Random Forest)'] = prediction_rf
-    
-    # Sort the DataFrame based on the predicted prices in descending order
-    prediction_df.sort_values(by='Predicted Price (Random Forest)', ascending=False, inplace=True)
-    
-    # Select the top N rows as the most promising types
-    most_promising_types = prediction_df.head(top_n)
-    
-    # Display the table of the most promising types
+
+    # Sort the DataFrame by the predicted prices in descending order
+    prediction_df = prediction_df.sort_values(by='Predicted Price (Linear Regression)', ascending=False)
+
+    # Display the most promising types
     st.write("### Most Promising Types")
-    st.write(most_promising_types)
+    st.write(prediction_df.head())
 
 def main():
     st.write("**Upload the dataset file (CSV format)**")
