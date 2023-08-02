@@ -297,17 +297,21 @@ def main():
         if submitted:
             # Perform the prediction using the linear regression model
             prediction_lr = predict_price_linear_regression(model_lr, values)
-            st.write("### **Predicted House Price using Linear Regression:**", prediction_lr[0])
+            st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
     
             # Reshape the values list to a 2D array before passing it to the random forest model
             values_2d = np.array([values])
             
             # Perform the prediction using the random forest model
             prediction_rf = predict_price_random_forest(model_rf, values_2d)
-            st.write("### **Predicted House Price using Random Forest:**", prediction_rf[0])
+            st.write("### **Predicted House Price using Random Forest:**", prediction_rf)
+    
+            # Convert scalar predictions to arrays
+            prediction_lr = np.array(prediction_lr)
+            prediction_rf = np.array(prediction_rf)
     
             # Visualize the predicted prices using a pie chart
-            visualize_prediction_pie(prediction_lr[0], prediction_rf[0])
+            visualize_prediction_pie(prediction_lr, prediction_rf)
             
 if __name__ == "__main__":
     main()
