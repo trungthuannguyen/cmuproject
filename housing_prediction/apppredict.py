@@ -253,45 +253,46 @@ def main():
         st.write("### House Price Prediction")
 
         st.write("**Enter the following features to get the predicted price:**")
-input_col1, input_col2 = st.columns(2)
+        input_col1, input_col2 = st.columns(2)
 
-with input_col1:
-    st.write("**CRIM**:")
-    crim = st.slider('crim', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
-    st.write("**INDUS**:")
-    indus = st.slider('indus', df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
-    st.write("**NOX**:")
-    nox = st.slider('nox', df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
-    st.write("**AGE**:")
-    age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
-    st.write("**RAD**:")
-    rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
-    st.write("**LSTAT**:")
-    lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
+        with input_col1:
+            st.write("**CRIM**:")
+            crim = st.slider('crim', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
+            st.write("**INDUS**:")
+            indus = st.slider('indus', df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
+            st.write("**NOX**:")
+            nox = st.slider('nox', df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
+            st.write("**AGE**:")
+            age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
+            st.write("**RAD**:")
+            rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
+            st.write("**LSTAT**:")
+            lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
 
-# Declare b_1000 here, outside of the input_col2 block
-b_1000 = 0  # Replace 0 with the desired initial value
+        # Include 'ptratio' here to match the 14 features used for training the Random Forest model
+        with input_col2:
+            st.write("**ZN**:")
+            zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
+            st.write("**CHAS**:")
+            chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
+            st.write("**RM**:")
+            rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
+            st.write("**DIS**:")
+            dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
+            st.write("**TAX**:")
+            tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
+            st.write("**MEDV**:")
+            medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
+            # Include 'PTRATIO' here
+            ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
+            # Update the value of b_1000
+            b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
-with input_col2:
-    st.write("**ZN**:")
-    zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
-    st.write("**CHAS**:")
-    chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
-    st.write("**RM**:")
-    rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
-    st.write("**DIS**:")
-    dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
-    st.write("**TAX**:")
-    tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-    st.write("**MEDV**:")
-    medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-    # Update the value of b_1000
-    b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
-    # Use PTRATION instead of PTRATIO
-    ptratio = st.slider('ptratio', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
+        # Modify the input_data to include all 14 features for prediction
+        input_data = np.array([[crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
 
-values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
-visualize_slider_values(*values)
+        values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+        visualize_slider_values(*values)
 
         submitted = st.button('Predict Price')
 
