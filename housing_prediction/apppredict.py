@@ -207,12 +207,12 @@ def predict_price_linear_regression(model, input_data):
         raise ValueError("Number of features in input data does not match the model")
 
     prediction = model.predict(input_data)
-    return prediction
+    return prediction.tolist()
 
 # Function to predict house prices using Random Forest
 def predict_price_random_forest(model_rf, input_data):
     prediction_rf = model_rf.predict(input_data)
-    return prediction_rf
+    return prediction_rf.tolist()
 
 # Function to visualize the predicted prices using a pie chart
 def visualize_prediction_pie(prediction_lr, prediction_rf):
