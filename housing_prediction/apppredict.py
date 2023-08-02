@@ -242,10 +242,13 @@ def visualize_slider_values(df, values):
     y = df['MEDV']
     x = pd.DataFrame(data=min_max_scaler.fit_transform(x), columns=features)
 
+    # Define a list of colors for each scatter plot
+    colors = sns.color_palette("husl", len(features))
+
     fig, axs = plt.subplots(ncols=4, nrows=2, figsize=(20, 10))
     axs = axs.flatten()
     for i, feature in enumerate(features):
-        sns.regplot(y=y, x=x[feature], ax=axs[i])
+        sns.regplot(y=y, x=x[feature], ax=axs[i], color=colors[i])
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
     st.pyplot(fig)
     
