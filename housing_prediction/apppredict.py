@@ -233,7 +233,7 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 # Function to visualize the selected feature values using a bar chart
 def visualize_slider_values(df, values):
-    features = ['LSTAT', 'INDUS', 'NOX', 'PTRATIO', 'RM', 'TAX', 'DIS', 'AGE']
+    features = ['LSTAT', 'INDUS', 'NOX', 'PTRATION', 'RM', 'TAX', 'DIS', 'AGE']
     min_max_scaler = MinMaxScaler()  # Use MinMaxScaler from sklearn.preprocessing
     x = df.loc[:, features]
     y = df['MEDV']
@@ -276,7 +276,7 @@ def main():
             st.write("**ZN**:")
             zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
 
-        # Include 'PTRATIO' here to match the 14 features used for training the Random Forest model
+        # Include 'PTRATION' here to match the 14 features used for training the Random Forest model
         with input_col2:
             st.write("**CHAS**:")
             chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
