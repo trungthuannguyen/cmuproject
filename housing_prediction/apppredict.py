@@ -283,15 +283,15 @@ def main():
             tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-            # Include 'PTRATIO' here
-            ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
+            # Include 'PTRATION' here
+            ptration = st.slider('ptration', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
             # Update the value of b_1000
             b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
 
         # Modify the input_data to include all 14 features for prediction
-        input_data = np.array([[crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
+        input_data = np.array([[crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]])
 
-        values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+        values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
         visualize_slider_values(*values)
 
         submitted = st.button('Predict Price')
