@@ -250,9 +250,8 @@ def main():
         explore_data(df)
         model_lr = train_model(df)
         model_rf = train_model_random_forest(df)
-        
-        st.write("### House Price Prediction")
 
+        st.write("### House Price Prediction")
         st.write("**Enter the following features to get the predicted price:**")
         input_col1, input_col2 = st.columns(2)
 
@@ -272,7 +271,7 @@ def main():
             st.write("**ZN**:")
             zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
 
-        # Include 'ptration' here to match the 14 features used for training the Random Forest model
+        # Include 'PTRATIO' here to match the 14 features used for training the Random Forest model
         with input_col2:
             st.write("**CHAS**:")
             chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
@@ -289,22 +288,23 @@ def main():
             st.write("**MEDV**:")
             medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
-    values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
-    visualize_slider_values(values)
+        values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+        visualize_slider_values(values)
 
         submitted = st.button('Predict Price')
 
         if submitted:
             # Perform the prediction using the linear regression model
+            input_data = np.array(values).reshape(1, -1)
             prediction_lr = predict_price_linear_regression(model_lr, input_data)
-            st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
+            st.write("### **Predicted House Price using Linear Regression:**", prediction_lr[0])
 
             # Perform the prediction using the random forest model
             prediction_rf = predict_price_random_forest(model_rf, input_data)
-            st.write("### **Predicted House Price using Random Forest:**", prediction_rf)
+            st.write("### **Predicted House Price using Random Forest:**", prediction_rf[0])
 
             # Visualize the predicted prices using a pie chart
-            visualize_prediction_pie(prediction_lr, prediction_rf)
+            visualize_prediction_pie(prediction_lr[0], prediction_rf[0])
 
 if __name__ == "__main__":
     main()
