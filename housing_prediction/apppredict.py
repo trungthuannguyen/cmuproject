@@ -332,7 +332,7 @@ def main():
         values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
         visualize_slider_values(df, values)
 
-        submitted = st.button('Predict Price')
+    submitted = st.button('Predict Price')
         
     if submitted:
         # Perform the prediction using the linear regression model
