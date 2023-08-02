@@ -233,7 +233,10 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 # Function to visualize the selected feature values using a bar chart
 def visualize_slider_values(df, values):
-    features = ['LSTAT', 'INDUS', 'NOX', 'RM', 'TAX', 'DIS', 'AGE', 'PTRATION']  # Correct 'PTRATIO' to 'PTRATION'
+    features = ['LSTAT', 'INDUS', 'NOX', 'RM', 'TAX', 'DIS', 'AGE', 'PTRATIO']  # Correct 'PTRATION' to 'PTRATIO'
+    if 'PTRATIO' not in df.columns:
+        features.remove('PTRATIO')  # Remove 'PTRATIO' from the features list if it does not exist in the DataFrame
+
     min_max_scaler = MinMaxScaler()  # Use MinMaxScaler from sklearn.preprocessing
     x = df.loc[:, features]
     y = df['MEDV']
