@@ -270,12 +270,13 @@ def process_prediction_results(df, prediction_lr, prediction_rf):
     # Create a new DataFrame to store the predictions
     prediction_df = df.copy()
 
-    # Repeat the scalar prediction to match the length of the DataFrame
+    # Repeat the scalar predictions to match the length of the DataFrame
     prediction_lr_array = np.repeat(prediction_lr, len(df))
+    prediction_rf_array = np.repeat(prediction_rf, len(df))
 
     # Add the predictions to the DataFrame
     prediction_df['Predicted Price (Linear Regression)'] = prediction_lr_array
-    prediction_df['Predicted Price (Random Forest)'] = prediction_rf
+    prediction_df['Predicted Price (Random Forest)'] = prediction_rf_array
 
     # Sort the DataFrame by the predicted prices in descending order
     prediction_df = prediction_df.sort_values(by='Predicted Price (Linear Regression)', ascending=False)
