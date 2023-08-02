@@ -9,7 +9,7 @@ from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler  # Add MinMaxScaler
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 
@@ -234,7 +234,7 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 # Function to visualize the selected feature values using a bar chart
 def visualize_slider_values(df, values):
     features = ['LSTAT', 'INDUS', 'NOX', 'PTRATIO', 'RM', 'TAX', 'DIS', 'AGE']
-    min_max_scaler = preprocessing.MinMaxScaler()
+    min_max_scaler = MinMaxScaler()  # Use MinMaxScaler from sklearn.preprocessing
     x = df.loc[:, features]
     y = df['MEDV']
     x = pd.DataFrame(data=min_max_scaler.fit_transform(x), columns=features)
@@ -297,7 +297,7 @@ def main():
         visualize_slider_values(df, values)
 
         submitted = st.button('Predict Price')
-
+        
         if submitted:
             # Perform the prediction using the linear regression model
             prediction_lr = predict_price_linear_regression(model_lr, values)
