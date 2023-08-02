@@ -133,8 +133,8 @@ def explore_data(df):
     df_copy = df.copy()
 
     st.write("#### Pair Plot")
-    # Convert DataFrame columns to arrays using the `values` attribute
-    fig = sns.pairplot(df_copy.values, diag_kind='kde')
+    # Pass the original DataFrame to the pairplot function
+    fig = sns.pairplot(df, diag_kind='kde')
     st.pyplot(fig)
 
     st.write("#### KDE Plot")
