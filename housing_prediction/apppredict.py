@@ -129,8 +129,11 @@ def explore_data(df):
     sns.boxplot(data=df, orient='h', palette='Set2')
     st.pyplot(fig)
 
+    # Create a copy of the DataFrame before plotting the pairplot
+    df_copy = df.copy()
+
     st.write("#### Pair Plot")
-    fig = sns.pairplot(df, diag_kind='kde')
+    fig = sns.pairplot(df_copy, diag_kind='kde')
     st.pyplot(fig)
 
     st.write("#### KDE Plot")
