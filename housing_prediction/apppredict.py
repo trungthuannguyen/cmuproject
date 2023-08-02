@@ -252,7 +252,12 @@ def visualize_slider_values(df, values):
     for i, feature in enumerate(features):
         sns.regplot(y=y, x=x[feature], ax=axs[i])  # Scatter plot with regression line for each feature
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
-    st.pyplot(fig)  # Display the plot using Streamlit's st.pyplot()
+
+    # Add title to the visualization
+    plt.suptitle('Relationship between Selected Features and House Prices', fontsize=16)
+
+    # Display the plot using Streamlit's st.pyplot()
+    st.pyplot(fig)
     
 def main():
     st.write("**Upload the dataset file (CSV format)**")
