@@ -266,7 +266,7 @@ def main():
         st.write("**Enter the following features to get the predicted price:**")
         input_col1, input_col2 = st.columns(2)
 
-       with input_col1:
+    with input_col1:
         st.write("**CRIM**:")
         st.empty()  # Empty placeholder for lowercase label
         crim = st.slider('', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
