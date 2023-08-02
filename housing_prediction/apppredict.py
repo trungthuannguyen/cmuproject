@@ -242,6 +242,17 @@ def visualize_slider_values(values):
     ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
 
+    # Bar plot of selected features against MEDV
+    features = ['LSTAT', 'INDUS', 'RM', 'TAX', 'NOX', 'PTRATION']
+    fig, ax = plt.subplots()
+    for feature in features:
+        sns.barplot(x=feature, y='MEDV', data=df, ax=ax)
+    ax.set_xlabel('Features')
+    ax.set_ylabel('MEDV')
+    ax.set_title('Selected Features vs MEDV')
+    ax.tick_params(axis='x', rotation=45)
+    st.pyplot(fig)
+
 def main():
     st.write("**Upload the dataset file (CSV format)**")
     uploaded_file = st.file_uploader("Choose a file", type=["csv"])
