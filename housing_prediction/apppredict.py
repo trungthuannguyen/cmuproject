@@ -263,7 +263,25 @@ def visualize_slider_values(df, values):
 
     # Display the plot using Streamlit's st.pyplot()
     st.pyplot(fig)
+
+# ##################
+def process_prediction_results(df, prediction_lr, prediction_rf, top_n=5):
+    # Create a new DataFrame to store the original data and the predicted prices
+    prediction_df = df.copy()
+    prediction_df['Predicted Price (Linear Regression)'] = prediction_lr
+    prediction_df['Predicted Price (Random Forest)'] = prediction_rf
     
+    # Sort the DataFrame based on the predicted prices in descending order
+    prediction_df.sort_values(by='Predicted Price (Random Forest)', ascending=False, inplace=True)
+    
+    # Select the top N rows as the most promising types
+    most_promising_types = prediction_df.head(top_n)
+    
+    # Display the table of the most promising types
+    st.write("### Most Promising Types")
+    st.write(most_promising_types)
+
+
 def main():
     st.write("**Upload the dataset file (CSV format)**")
     uploaded_file = st.file_uploader("Choose a file", type=["csv"])
@@ -316,24 +334,27 @@ def main():
 
         submitted = st.button('Predict Price')
         
-        if submitted:
-            # Perform the prediction using the linear regression model
-            prediction_lr = predict_price_linear_regression(model_lr, values)
-            st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
+    if submitted:
+        # Perform the prediction using the linear regression model
+        prediction_lr = predict_price_linear_regression(model_lr, values)
+        st.write("### **Predicted House Price using Linear Regression:**", prediction_lr)
     
-            # Reshape the values list to a 2D array before passing it to the random forest model
-            values_2d = np.array([values])
+        # Reshape the values list to a 2D array before passing it to the random forest model
+        values_2d = np.array([values])
             
-            # Perform the prediction using the random forest model
-            prediction_rf = predict_price_random_forest(model_rf, values_2d)
-            st.write("### **Predicted House Price using Random Forest:**", prediction_rf)
+        # Perform the prediction using the random forest model
+        prediction_rf = predict_price_random_forest(model_rf, values_2d)
+        st.write("### **Predicted House Price using Random Forest:**", prediction_rf)
     
-            # Convert scalar predictions to arrays
-            prediction_lr = np.array(prediction_lr)
-            prediction_rf = np.array(prediction_rf)
+        # Convert scalar predictions to arrays
+        prediction_lr = np.array(prediction_lr)
+        prediction_rf = np.array(prediction_rf)
     
-            # Visualize the predicted prices using a pie chart
-            visualize_prediction_pie(prediction_lr, prediction_rf)
+        # Visualize the predicted prices using a pie chart
+        visualize_prediction_pie(prediction_lr, prediction_rf)
+        
+        # Process and display the most promising types
+        process_prediction_results(df, prediction_lr, prediction_rf)
             
 if __name__ == "__main__":
     main()
