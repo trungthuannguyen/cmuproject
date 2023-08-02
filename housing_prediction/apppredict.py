@@ -121,7 +121,7 @@ def explore_data(df):
     st.write("#### Correlation Heatmap")
     corr_matrix = df.corr()
     fig, ax = plt.subplots()
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax, annot_kws={"size": 6})
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
     st.pyplot(fig)
 
     st.write("#### Box Plot")
@@ -242,13 +242,10 @@ def visualize_slider_values(df, values):
     y = df['MEDV']
     x = pd.DataFrame(data=min_max_scaler.fit_transform(x), columns=features)
 
-    # Define a list of colors for each scatter plot
-    colors = sns.color_palette("husl", len(features))
-
     fig, axs = plt.subplots(ncols=4, nrows=2, figsize=(20, 10))
     axs = axs.flatten()
     for i, feature in enumerate(features):
-        sns.regplot(y=y, x=x[feature], ax=axs[i], color=colors[i])
+        sns.regplot(y=y, x=x[feature], ax=axs[i])
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
     st.pyplot(fig)
     
@@ -266,55 +263,41 @@ def main():
         st.write("**Enter the following features to get the predicted price:**")
         input_col1, input_col2 = st.columns(2)
 
-    with input_col1:
-        st.write("**CRIM**:")
-        st.empty()  # Empty placeholder for lowercase label
-        crim = st.slider('', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
-        st.write("**INDUS**:")
-        st.empty()  # Empty placeholder for lowercase label
-        indus = st.slider('', df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
-        st.write("**NOX**:")
-        st.empty()  # Empty placeholder for lowercase label
-        nox = st.slider('', df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
-        st.write("**AGE**:")
-        st.empty()  # Empty placeholder for lowercase label
-        age = st.slider('', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
-        st.write("**RAD**:")
-        st.empty()  # Empty placeholder for lowercase label
-        rad = st.slider('', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
-        st.write("**LSTAT**:")
-        st.empty()  # Empty placeholder for lowercase label
-        lstat = st.slider('', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
-        st.write("**ZN**:")
-        st.empty()  # Empty placeholder for lowercase label
-        zn = st.slider('', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
+        with input_col1:
+            st.write("**CRIM**:")
+            crim = st.slider('crim', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
+            st.write("**INDUS**:")
+            indus = st.slider('indus', df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
+            st.write("**NOX**:")
+            nox = st.slider('nox', df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
+            st.write("**AGE**:")
+            age = st.slider('age', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
+            st.write("**RAD**:")
+            rad = st.slider('rad', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
+            st.write("**LSTAT**:")
+            lstat = st.slider('lstat', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
+            st.write("**ZN**:")
+            zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
 
-    # Include 'PTRATION' here to match the 14 features used for training the Random Forest model
-    with input_col2:
-        st.write("**CHAS**:")
-        st.empty()  # Empty placeholder for lowercase label
-        chas = st.slider('', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
-        st.write("**RM**:")
-        st.empty()  # Empty placeholder for lowercase label
-        rm = st.slider('', df['RM'].min(), df['RM'].max(), df['RM'].mean())
-        st.write("**DIS**:")
-        st.empty()  # Empty placeholder for lowercase label
-        dis = st.slider('', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
-        st.write("**TAX**:")
-        st.empty()  # Empty placeholder for lowercase label
-        tax = st.slider('', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-        st.write("**PTRATION**:")
-        st.empty()  # Empty placeholder for lowercase label
-        ptration = st.slider('', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
-        st.write("**B_1000**:")
-        st.empty()  # Empty placeholder for lowercase label
-        b_1000 = st.slider('', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
-        st.write("**MEDV**:")
-        st.empty()  # Empty placeholder for lowercase label
-        medv = st.slider('', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
+        # Include 'PTRATION' here to match the 14 features used for training the Random Forest model
+        with input_col2:
+            st.write("**CHAS**:")
+            chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
+            st.write("**RM**:")
+            rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
+            st.write("**DIS**:")
+            dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
+            st.write("**TAX**:")
+            tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
+            st.write("**PTRATION**:")
+            ptration = st.slider('ptration', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
+            st.write("**B_1000**:")
+            b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
+            st.write("**MEDV**:")
+            medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
-    values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
-    visualize_slider_values(df, values)
+        values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+        visualize_slider_values(df, values)
 
         submitted = st.button('Predict Price')
         
