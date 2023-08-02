@@ -278,23 +278,12 @@ def process_prediction_results(df, prediction_lr, prediction_rf):
     prediction_df['Predicted Price (Linear Regression)'] = prediction_lr_array
     prediction_df['Predicted Price (Random Forest)'] = prediction_rf_array
 
-    # Calculate the rank based on the predicted prices from Linear Regression
-    prediction_df['Rank'] = prediction_df['Predicted Price (Linear Regression)'].rank(ascending=False)
-
     # Sort the DataFrame by the predicted prices in descending order
     prediction_df = prediction_df.sort_values(by='Predicted Price (Linear Regression)', ascending=False)
 
-    # Apply styling to the DataFrame
-    def highlight_max(s):
-        is_max = s == s.max()
-        return ['background-color: lightgreen' if v else '' for v in is_max]
-
-    prediction_df_styled = prediction_df.style.apply(highlight_max, subset=['Predicted Price (Linear Regression)'],
-                                                     axis=0)
-
     # Display the most promising types
-    st.write("### Most Promising Types (Sorted by Predicted Price - Linear Regression)")
-    st.dataframe(prediction_df_styled)
+    st.write("### Most Promising Types")
+    st.write(prediction_df.head())
 
 def main():
     st.write("**Upload the dataset file (CSV format)**")
