@@ -272,7 +272,7 @@ with input_col1:
 # Declare b_1000 here, outside of the input_col2 block
 b_1000 = 0  # Replace 0 with the desired initial value
 
-with input_col2:
+    with input_col2:
         st.write("**ZN**:")
         zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
         st.write("**CHAS**:")
