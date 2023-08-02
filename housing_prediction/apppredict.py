@@ -297,13 +297,13 @@ def main():
             # Perform the prediction using the linear regression model
             prediction_lr = predict_price_linear_regression(model_lr, [values])
             st.write("### **Predicted House Price using Linear Regression:**", prediction_lr[0])
-
+    
             # Perform the prediction using the random forest model
             prediction_rf = predict_price_random_forest(model_rf, [values])
             st.write("### **Predicted House Price using Random Forest:**", prediction_rf[0])
-
+    
             # Visualize the predicted prices using a pie chart
-            visualize_prediction_pie([prediction_lr[0]], [prediction_rf[0]])
+            visualize_prediction_pie(prediction_lr[0], prediction_rf[0])
 
 if __name__ == "__main__":
     main()
