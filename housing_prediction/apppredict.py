@@ -267,23 +267,51 @@ def main():
         input_col1, input_col2 = st.columns(2)
 
        with input_col1:
-        crim = st.slider('CRIM:', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
-        indus = st.slider('INDUS:', df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
-        nox = st.slider('NOX:', df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
-        age = st.slider('AGE:', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
-        rad = st.slider('RAD:', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
-        lstat = st.slider('LSTAT:', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
-        zn = st.slider('ZN:', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
+        st.write("**CRIM**:")
+        st.empty()  # Empty placeholder for lowercase label
+        crim = st.slider('', df['CRIM'].min(), df['CRIM'].max(), df['CRIM'].mean())
+        st.write("**INDUS**:")
+        st.empty()  # Empty placeholder for lowercase label
+        indus = st.slider('', df['INDUS'].min(), df['INDUS'].max(), df['INDUS'].mean())
+        st.write("**NOX**:")
+        st.empty()  # Empty placeholder for lowercase label
+        nox = st.slider('', df['NOX'].min(), df['NOX'].max(), df['NOX'].mean())
+        st.write("**AGE**:")
+        st.empty()  # Empty placeholder for lowercase label
+        age = st.slider('', df['AGE'].min(), df['AGE'].max(), df['AGE'].mean())
+        st.write("**RAD**:")
+        st.empty()  # Empty placeholder for lowercase label
+        rad = st.slider('', float(df['RAD'].min()), float(df['RAD'].max()), float(df['RAD'].mean()))
+        st.write("**LSTAT**:")
+        st.empty()  # Empty placeholder for lowercase label
+        lstat = st.slider('', df['LSTAT'].min(), df['LSTAT'].max(), df['LSTAT'].mean())
+        st.write("**ZN**:")
+        st.empty()  # Empty placeholder for lowercase label
+        zn = st.slider('', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
 
     # Include 'PTRATION' here to match the 14 features used for training the Random Forest model
     with input_col2:
-        chas = st.slider('CHAS:', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
-        rm = st.slider('RM:', df['RM'].min(), df['RM'].max(), df['RM'].mean())
-        dis = st.slider('DIS:', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
-        tax = st.slider('TAX:', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-        ptration = st.slider('PTRATION:', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
-        b_1000 = st.slider('B_1000:', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
-        medv = st.slider('MEDV:', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
+        st.write("**CHAS**:")
+        st.empty()  # Empty placeholder for lowercase label
+        chas = st.slider('', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
+        st.write("**RM**:")
+        st.empty()  # Empty placeholder for lowercase label
+        rm = st.slider('', df['RM'].min(), df['RM'].max(), df['RM'].mean())
+        st.write("**DIS**:")
+        st.empty()  # Empty placeholder for lowercase label
+        dis = st.slider('', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
+        st.write("**TAX**:")
+        st.empty()  # Empty placeholder for lowercase label
+        tax = st.slider('', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
+        st.write("**PTRATION**:")
+        st.empty()  # Empty placeholder for lowercase label
+        ptration = st.slider('', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
+        st.write("**B_1000**:")
+        st.empty()  # Empty placeholder for lowercase label
+        b_1000 = st.slider('', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
+        st.write("**MEDV**:")
+        st.empty()  # Empty placeholder for lowercase label
+        medv = st.slider('', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
 
     values = [crim, indus, nox, age, rad, ptration, lstat, zn, chas, rm, dis, tax, b_1000, medv]
     visualize_slider_values(df, values)
