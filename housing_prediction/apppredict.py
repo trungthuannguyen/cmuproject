@@ -272,24 +272,26 @@ with input_col1:
 # Declare b_1000 here, outside of the input_col2 block
 b_1000 = 0  # Replace 0 with the desired initial value
 
-    with input_col2:
-        st.write("**ZN**:")
-        zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
-        st.write("**CHAS**:")
-        chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
-        st.write("**RM**:")
-        rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
-        st.write("**DIS**:")
-        dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
-        st.write("**TAX**:")
-        tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
-        st.write("**MEDV**:")
-        medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
-        ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
+with input_col2:
+    st.write("**ZN**:")
+    zn = st.slider('zn', df['ZN'].min(), df['ZN'].max(), df['ZN'].mean())
+    st.write("**CHAS**:")
+    chas = st.slider('chas', df['CHAS'].min(), df['CHAS'].max(), df['CHAS'].mean())
+    st.write("**RM**:")
+    rm = st.slider('rm', df['RM'].min(), df['RM'].max(), df['RM'].mean())
+    st.write("**DIS**:")
+    dis = st.slider('dis', df['DIS'].min(), df['DIS'].max(), df['DIS'].mean())
+    st.write("**TAX**:")
+    tax = st.slider('tax', df['TAX'].min(), df['TAX'].max(), df['TAX'].mean())
+    st.write("**MEDV**:")
+    medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
+    # Update the value of b_1000
+    b_1000 = st.slider('b_1000', df['B_1000'].min(), df['B_1000'].max(), df['B_1000'].mean())
+    # Use PTRATION instead of PTRATIO
+    ptratio = st.slider('ptratio', df['PTRATION'].min(), df['PTRATION'].max(), df['PTRATION'].mean())
 
-    features = ['crim', 'indus', 'nox', 'age', 'rad', 'ptratio', 'lstat', 'zn', 'chas', 'rm', 'dis', 'tax', 'b_1000', 'medv']
-    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
-    visualize_slider_values(features, values)
+values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+visualize_slider_values(*values)
 
         submitted = st.button('Predict Price')
 
