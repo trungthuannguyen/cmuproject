@@ -233,9 +233,9 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 # Function to visualize the selected feature values using a bar chart
 def visualize_slider_values(df, values):
-    features = ['LSTAT', 'INDUS', 'NOX', 'RM', 'TAX', 'DIS', 'AGE', 'PTRATION']  # Correct 'PTRATION' to 'PTRATIO'
-    if 'PTRATION' not in df.columns:
-        features.remove('PTRATION')  # Remove 'PTRATIO' from the features list if it does not exist in the DataFrame
+    features = ['LSTAT', 'INDUS', 'NOX', 'RM', 'TAX', 'DIS', 'AGE']
+    if 'PTRATION' in df.columns:
+        features.append('PTRATION')  # Include 'PTRATION' in the features list if it exists in the DataFrame
 
     min_max_scaler = MinMaxScaler()  # Use MinMaxScaler from sklearn.preprocessing
     x = df.loc[:, features]
@@ -248,7 +248,7 @@ def visualize_slider_values(df, values):
         sns.regplot(y=y, x=x[feature], ax=axs[i])
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
     st.pyplot(fig)
-
+    
 def main():
     st.write("**Upload the dataset file (CSV format)**")
     uploaded_file = st.file_uploader("Choose a file", type=["csv"])
