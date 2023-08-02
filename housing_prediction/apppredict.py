@@ -253,16 +253,14 @@ def visualize_slider_values(df, values):
         sns.regplot(y=y, x=x[feature], ax=axs[i])  # Scatter plot with regression line for each feature
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
 
+    # Create a bold and distinct title for the content
+    content_title = "Relationship between Selected Features and House Prices"
+    
     # Add title to the visualization
-    plt.suptitle('Relationship between Selected Features and House Prices', fontsize=20)
-
-    # Display the suptitle in bold on a separate line
-    plt.subplots_adjust(top=0.9)  # Adjust the top spacing to make room for the suptitle
-    plt.text(0.5, 0.95, 'Relationship between Selected Features and House Prices', fontsize=20, weight='bold', ha='center', va='center', transform=fig.transFigure)
+    plt.suptitle(content_title, fontsize=20)
 
     # Display the plot using Streamlit's st.pyplot()
     st.pyplot(fig)
-
     
 def main():
     st.write("**Upload the dataset file (CSV format)**")
