@@ -233,9 +233,6 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
 
 # Function to visualize the selected feature values using a bar chart
 def visualize_slider_values(df, values):
-    # Add title to the visualization and display it in bold
-    plt.suptitle('Relationship between Selected Features and House Prices', fontsize=20, weight='bold')
-    
     # List of features to be visualized
     features = ['LSTAT', 'INDUS', 'NOX', 'RM', 'TAX', 'DIS', 'AGE']
 
@@ -255,6 +252,13 @@ def visualize_slider_values(df, values):
     for i, feature in enumerate(features):
         sns.regplot(y=y, x=x[feature], ax=axs[i])  # Scatter plot with regression line for each feature
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
+
+    # Add title to the visualization
+    plt.suptitle('Relationship between Selected Features and House Prices', fontsize=20)
+
+    # Display the suptitle in bold on a separate line
+    plt.subplots_adjust(top=0.9)  # Adjust the top spacing to make room for the suptitle
+    plt.text(0.5, 0.95, 'Relationship between Selected Features and House Prices', fontsize=20, weight='bold', ha='center', va='center', transform=fig.transFigure)
 
     # Display the plot using Streamlit's st.pyplot()
     st.pyplot(fig)
