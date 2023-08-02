@@ -217,6 +217,7 @@ def predict_price_random_forest(model_rf, input_data):
 # Function to visualize the predicted prices using a pie chart
 def visualize_prediction_pie(prediction_lr, prediction_rf):
     labels = ['Linear Regression', 'Random Forest']
+    sizes = [prediction_lr, prediction_rf]
     # Ensure that the predictions are non-negative (you can set negative values to 0)
     prediction_lr = np.maximum(prediction_lr, 0)
     prediction_rf = np.maximum(prediction_rf, 0)
