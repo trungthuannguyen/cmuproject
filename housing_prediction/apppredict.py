@@ -231,10 +231,7 @@ def visualize_prediction_pie(prediction_lr, prediction_rf):
     st.pyplot(fig)
 
 # Function to visualize the selected feature values using a bar chart
-def visualize_slider_values(feature_values):
-    features = list(feature_values.keys())
-    values = list(feature_values.values())
-
+def visualize_slider_values(features, values):
     fig, ax = plt.subplots()
     ax.bar(features, values, color=['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo'])
     ax.set_xlabel('Features')
@@ -290,9 +287,9 @@ with input_col2:
         medv = st.slider('medv', df['MEDV'].min(), df['MEDV'].max(), df['MEDV'].mean())
         ptratio = st.slider('ptratio', df['PTRATIO'].min(), df['PTRATIO'].max(), df['PTRATIO'].mean())
 
-    feature_values = {'crim': crim, 'indus': indus, 'nox': nox, 'age': age, 'rad': rad, 'ptratio': ptratio, 'lstat': lstat,
-                      'zn': zn, 'chas': chas, 'rm': rm, 'dis': dis, 'tax': tax, 'medv': medv, 'b_1000': b_1000}
-    visualize_slider_values(feature_values)
+    features = ['crim', 'indus', 'nox', 'age', 'rad', 'ptratio', 'lstat', 'zn', 'chas', 'rm', 'dis', 'tax', 'b_1000', 'medv']
+    values = [crim, indus, nox, age, rad, ptratio, lstat, zn, chas, rm, dis, tax, b_1000, medv]
+    visualize_slider_values(features, values)
 
         submitted = st.button('Predict Price')
 
