@@ -157,8 +157,12 @@ def explore_data(df):
 
 # Function to save the trained model
 def save_model(model, filename):
-    with open(filename, 'wb') as file:
-        pickle.dump(model, file)
+    try:
+        with open(filename, 'wb') as file:
+            pickle.dump(model, file)
+        st.write("Model saved successfully.")
+    except Exception as e:
+        st.error(f"Error while saving the model: {str(e)}")
 
 # Function to train and evaluate the model
 def train_model(df):
@@ -181,8 +185,10 @@ def train_model(df):
     st.write("#### Model Performance")
     st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
     st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model, "housing_prediction/LinearRegression.pkl")
-    return model
+    trained_model = train_model(df)
+    model_filename = "housing_prediction/LinearRegression.pkl"
+    save_model(trained_model, model_filename)
+
 
 # Function to train and evaluate the Random Forest model
 def train_model_random_forest(df):
