@@ -4,12 +4,13 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import MinMaxScaler
-import pickle
+from sklearn.preprocessing import StandardScaler, MinMaxScaler  # Add MinMaxScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
 
 # Header with logo
 logo_path = "housing_prediction/team3vn_cmu.jpg"
