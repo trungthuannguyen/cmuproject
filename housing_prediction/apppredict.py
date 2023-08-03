@@ -166,8 +166,6 @@ def save_model(model, filename):
 
 # Function to train and evaluate the model
 def train_model(df):
-    st.write("### Model Training and Evaluation")
-
     X = df.drop('MEDV', axis=1)
     y = df['MEDV']
 
@@ -187,7 +185,7 @@ def train_model(df):
     st.write("R-squared Score:", r2_score(y_test, y_pred))
     trained_model = train_model(df)
     model_filename = "housing_prediction/LinearRegression.pkl"
-    save_model(trained_model, model_filename)
+    save_model(model, model_filename)
 
 
 # Function to train and evaluate the Random Forest model
